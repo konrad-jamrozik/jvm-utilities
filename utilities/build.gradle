@@ -1,4 +1,4 @@
-group 'com.kjamrozik'
+group 'com.github.konrad_jamrozik'
 version '0.1.0'
 
 apply plugin: 'groovy'

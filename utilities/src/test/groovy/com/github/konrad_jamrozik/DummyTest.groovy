@@ -1,4 +1,4 @@
-package com.github.kjamrozik
+package com.github.konrad_jamrozik
 
 import org.junit.Test
 import org.junit.runner.RunWith
