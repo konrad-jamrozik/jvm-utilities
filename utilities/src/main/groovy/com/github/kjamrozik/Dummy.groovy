@@ -1,4 +1,4 @@
-package com.kjamrozik
+package com.github.kjamrozik
 
 public class Dummy
 {
