@@ -15,7 +15,6 @@ import java.nio.file.Path
 @SuppressWarnings("GroovyUnusedDeclaration")
 class PathExtensions
 {
-
   public static String getExtension(Path self)
   {
     FilenameUtils.getExtension(self.fileName.toString())
