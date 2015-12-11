@@ -5,7 +5,6 @@ package com.github.konrad_jamrozik
 import groovy.transform.stc.ClosureParams
 import groovy.transform.stc.FirstParam
 
-@SuppressWarnings("GroovyUnusedDeclaration")
 class IterableExtensions
 {
   public static <T> String truncateAndPrint(Iterable<T> self, int max)
