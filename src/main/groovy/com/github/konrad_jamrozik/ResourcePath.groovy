@@ -49,10 +49,12 @@ import java.nio.file.Paths
  * </code></pre>
  *
  * </p><p>
+ *
  * Known limitation: doesn't support jar files. See:
  * <a href="
  * http://stackoverflow.com/questions/22605666/java-access-files-in-jar-causes-java-nio-file-filesystemnotfoundexception
  * ">this SO question</a>.
+ * </p>
  */
 class ResourcePath
 {
