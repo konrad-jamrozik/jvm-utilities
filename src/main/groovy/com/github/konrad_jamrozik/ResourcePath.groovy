@@ -27,10 +27,17 @@ import java.nio.file.Paths
  * {@code process (Test)resources} gradle task.
  *
  * <br/>{@code ==========}
- *
  * </p><p>
  *
- * Example: when this class is constructed with a constructor param of:
+ * Known limitation: doesn't support jar files. See:
+ * <a href="
+ * http://stackoverflow.com/questions/22605666/java-access-files-in-jar-causes-java-nio-file-filesystemnotfoundexception
+ * ">this SO question</a>.
+ *
+ * <br/>{@code ==========}
+ * </p><p>
+ *
+ * Usage example: when this class is constructed with a constructor param of:
  *
  * <pre><code>
  *   generated/Monitor.java
@@ -48,12 +55,6 @@ import java.nio.file.Paths
  *   [repo_root]\dev\droidmate\projects\monitor-generator\build\resources\test\generated\Monitor.java
  * </code></pre>
  *
- * </p><p>
- *
- * Known limitation: doesn't support jar files. See:
- * <a href="
- * http://stackoverflow.com/questions/22605666/java-access-files-in-jar-causes-java-nio-file-filesystemnotfoundexception
- * ">this SO question</a>.
  * </p>
  */
 class ResourcePath
