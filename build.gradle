@@ -1,5 +1,5 @@
 group 'com.github.konrad-jamrozik'
-version '0.1.0'
+version 'dev'
 
 apply plugin: 'java'
 apply plugin: 'groovy'
