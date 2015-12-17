@@ -45,6 +45,11 @@ class IterableExtensions
       return defaultVal
   }
 
+  public static <T> T findSingleOrDefault(Iterable<T> self, T defaultVal, @ClosureParams(FirstParam.FirstGenericType.class) Closure closure)
+  {
+    def result = self.findAll(closure)
+    return result.findSingleOrDefault(defaultVal)
+  }
 
   public static <T> boolean noDuplicates(Iterable<T> self)
   {
