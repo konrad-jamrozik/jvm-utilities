@@ -71,4 +71,9 @@ class IterableExtensions
     return left as Set == intersectionSet
 
   }
+
+  public static <T> List<T> shallowFlatten(Iterable<Iterable<T>> self)
+  {
+    return self.inject([] as List<T>) {List<T> flattened, Iterable<T> item -> flattened + item}
+  }
 }
