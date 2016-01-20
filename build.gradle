@@ -37,13 +37,31 @@ dependencies {
   compile 'commons-io:commons-io:2.4'
 
   testCompile group: 'junit', name: 'junit', version: '4.12'
+
+  File resDir = sourceSets.test.resources.srcDirs.first()
+  File subdir = new File(resDir, "subdir")
+  File fixtureZip = resDir.listFiles().find { it.name == "_fixture.zip" }
+  testRuntime files(fixtureZip)
+  testRuntime files(subdir)
 }
 
 task debug {
   doLast {
     // Reference: https://discuss.gradle.org/t/how-to-get-a-complete-list-of-all-artifacts-generated-by-a-build/4492
-    println "Archives Artifacts: " + configurations.archives.allArtifacts
-
-    println project.buildDir
+//    println "Archives Artifacts: " + configurations.archives.allArtifacts
+//    println project.buildDir
+    sourceSets.test.runtimeClasspath.each { println it }
   }
+}
+
+tasks.withType(Test) {
+  testLogging {
+    events 'started', 'passed'
+    showStandardStreams = true
+  }
+}
+
+task testi(type: Test, dependsOn: testClasses) {
+  outputs.upToDateWhen {false}
+  include '**/*ResourcePathTest*'
 }
