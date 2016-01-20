@@ -11,9 +11,6 @@ public class ScratchpadTest
   @Test
   void "test"()
   {
-    println "test"
   }
-
-
 }
 

@@ -11,6 +11,10 @@ import java.nio.file.Paths
  * A {@link Path} representing an existing system resource.
  *
  * </p><p>
+ * Will throw an {@link IOException} if no URL of the resource can be found or if all of the found URLs are within jar files,
+ * not directly in the file system.
+ *
+ * </p><p>
  *
  * In gradle-based projects, the resources dirs that are searched are:
  * <pre><code>
@@ -25,14 +29,6 @@ import java.nio.file.Paths
  * </code></pre>
  * so if you want to ensure a resource is available, put it in one of the dirs listed directly above and then rerun
  * {@code process (Test)resources} gradle task.
- *
- * <br/>{@code ==========}
- * </p><p>
- *
- * Known limitation: doesn't support jar files. See:
- * <a href="
- * http://stackoverflow.com/questions/22605666/java-access-files-in-jar-causes-java-nio-file-filesystemnotfoundexception
- * ">this SO question</a>.
  *
  * <br/>{@code ==========}
  * </p><p>
@@ -63,17 +59,31 @@ class ResourcePath
   @Delegate
   Path path
 
-  public ResourcePath(String pathString)
+  URL url
+
+  List<URL> alternativeUrls
+
+  public ResourcePath(String pathString) throws IOException
   {
-    URL resourceURL = ClassLoader.getSystemResource(pathString)
-    assert resourceURL != null: "The call to ClassLoader.getSystemResource(\"$pathString\") was expected to return non-null " +
-      "resource URL but it returned null instead"
+    Enumeration<URL> urlsEnum = ClassLoader.getSystemResources(pathString)
+    if (!urlsEnum.hasMoreElements())
+      throw new IOException("No resource URL found for path $pathString")
 
-    Path path = Paths.get(resourceURL.toURI())
-    assert Files.isRegularFile(path) || Files.isDirectory(path):
-      "Resource named '$path' is not a regular file nor directory.\n" +
-        "Path to the resource: ${path.toAbsolutePath()}"
+    List<URL> urls = urlsEnum.collect()
+    URL nonJarUrl = urls.find { it.toString().startsWith("file:")} as URL
+    if (nonJarUrl == null)
+    {
+      String urlsString = urls.collect { it.toString() }.join("\n")
+      throw new IOException("No URL found for path $pathString that starts with 'file' protocol. The found URLs:\n$urlsString")
+    }
 
+    Path path = Paths.get(nonJarUrl.toURI())
+    if (!(Files.isRegularFile(path) || Files.isDirectory(path)))
+      throw new IOException("Resource named '$path' is not a regular file nor a directory.\n" +
+        "Path to the resource: ${path.toAbsolutePath()}")
+
+    this.url = nonJarUrl
+    this.alternativeUrls = urls - nonJarUrl
     this.path = path
   }
 }
