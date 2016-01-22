@@ -18,4 +18,4 @@ In Gradle:
           compile 'com.github.konrad-jamrozik:utilities:master-SNAPSHOT'
     }
 
-For how to use other build systems and build logs, see [jitpack.io](https://jitpack.io/#konrad-jamrozik/utilities).
+For information on how to use other build systems and build logs, see [jitpack.io](https://jitpack.io/#konrad-jamrozik/utilities).
