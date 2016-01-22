@@ -18,7 +18,7 @@ public class FileSystemsOperationsTest
 {
 
   @Test
-  void "Transfers directory with contents"()
+  void "Copies directory to dir in a different file system"()
   {
     FileSystem sourceFs = Jimfs.newFileSystem(Configuration.unix())
     Path dir = sourceFs.getPath("dir")
