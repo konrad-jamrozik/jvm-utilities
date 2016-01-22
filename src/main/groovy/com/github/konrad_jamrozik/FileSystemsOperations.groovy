@@ -11,6 +11,7 @@ class FileSystemsOperations implements IFileSystemsOperations
     assert Files.isDirectory(copiedDir)
     assert Files.isDirectory(destDir)
     assert copiedDir.fileSystem != destDir.fileSystem
+    assert copiedDir.parent != null
 
     copyPath(copiedDir, copiedDir.parent, destDir)
     copiedDir.eachFileRecurse {Path it -> copyPath(it, copiedDir.parent, destDir) }
@@ -30,6 +31,10 @@ class FileSystemsOperations implements IFileSystemsOperations
 
   private static Path copyPath(Path it, Path src, Path dest)
   {
+    assert it != null
+    assert Files.isDirectory(src)
+    assert Files.isDirectory(dest)
+
     Path itInDest = mapToTarget(it, src, dest)
 
     assert !Files.exists(itInDest)
