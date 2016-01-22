@@ -6,15 +6,37 @@ import java.nio.file.Path
 class FileSystemsOperations implements IFileSystemsOperations
 {
   @Override
-  void copy(Path target, Path dest)
+  List<String> copy(Path dir, Path dest)
   {
-    assert target != null
-    assert dest != null
-    assert target.fileSystem != dest.fileSystem
-    assert Files.exists(target)
-    assert Files.exists(dest)
+    assert Files.isDirectory(dir)
+    assert Files.isDirectory(dest)
+    assert dir.fileSystem != dest.fileSystem
 
-    // KJA current work
-    assert false: "Not yet implemented!"
+    List<String> destPaths = []
+
+    destPaths += copyPath(dir, dest).toAbsolutePath().toString()
+    dir.eachFileRecurse {Path it ->
+      destPaths += copyPath(it, dest).toAbsolutePath().toString()
+    }
+
+    return destPaths
+  }
+
+  private static Path copyPath(Path it, Path dest)
+  {
+    Path itInDest = dest.resolve(it.toString())
+
+    if (Files.isDirectory(it))
+    {
+      Files.createDirectories(itInDest)
+
+    } else if (Files.isRegularFile(it))
+    {
+      Files.createDirectories(itInDest.parent)
+      Files.copy(it, itInDest)
+
+    } else throw new AssertionError()
+
+    return itInDest
   }
 }

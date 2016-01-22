@@ -3,7 +3,6 @@ package com.github.konrad_jamrozik
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import org.junit.FixMethodOrder
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -19,7 +18,6 @@ public class FileSystemsOperationsTest
 {
 
   @Test
-  @Ignore("not yet passing")
   void "Transfers directory with contents"()
   {
     FileSystem sourceFs = Jimfs.newFileSystem(Configuration.unix())
@@ -49,21 +47,21 @@ public class FileSystemsOperationsTest
     assert Files.isDirectory(dest)
 
     // Act
-    new FileSystemsOperations().copy(dir, dest)
+    List<String> destPaths = new FileSystemsOperations().copy(dir, dest)
 
-    [
+    def expectedPaths = [
       "/work/dest/dir",
-      "/work/dest/subdir"
-    ].each {
-      assert Files.isDirectory(targetFs.getPath(it))
-    }
-
-    [
       "/work/dest/dir/data1.txt",
-      "/work/dest/subdir/data2.txt"
-    ].each {
-      assert Files.isRegularFile(targetFs.getPath(it))
-    }
+      "/work/dest/dir/subdir",
+      "/work/dest/dir/subdir/data2.txt"
+    ]
+
+    expectedPaths.each { assert it in destPaths }
+    destPaths.each { assert it in expectedPaths }
+
+
+    assert dest.resolve("dir/data1.txt").text == "123"
+    assert dest.resolve("dir/subdir/data2.txt").text == "abc"
   }
 
 }

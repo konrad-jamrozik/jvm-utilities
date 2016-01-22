@@ -4,6 +4,6 @@ import java.nio.file.Path
 
 interface IFileSystemsOperations
 {
-  void copy(Path target, Path dest)
+  List<String> copy(Path dir, Path dest)
 
 }
