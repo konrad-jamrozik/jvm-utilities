@@ -35,7 +35,7 @@ class FileSystemsOperations implements IFileSystemsOperations
     assert Files.isDirectory(src)
     assert Files.isDirectory(dest)
 
-    Path itInDest = mapToTarget(it, src, dest)
+    Path itInDest = mapToDestination(it, src, dest)
 
     assert !Files.exists(itInDest)
 
@@ -53,7 +53,7 @@ class FileSystemsOperations implements IFileSystemsOperations
     return itInDest
   }
 
-  private static Path mapToTarget(Path path, Path srcDir, Path destDir)
+  private static Path mapToDestination(Path path, Path srcDir, Path destDir)
   {
     return destDir.resolve(srcDir.relativize(path).toString().replace(srcDir.fileSystem.separator, destDir.fileSystem.separator))
   }
