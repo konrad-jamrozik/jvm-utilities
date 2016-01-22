@@ -44,6 +44,7 @@ public class FileSystemsOperationsTest
     Path dir = buildFixture()
     Path dest = buildDestFs()
 
+
     // Act
     dir.copyDirContentsRecursivelyToDirInDifferentFileSystem(dest)
 
@@ -93,5 +94,14 @@ public class FileSystemsOperationsTest
     return dest
   }
 
+  @Test
+  public void UsageInJavaExample() throws IOException
+  {
+    Path dir =  Jimfs.newFileSystem().getPath("dirWithSomeContents");
+    Files.createDirectory(dir);
+    Path dest = Jimfs.newFileSystem().getPath("destDir");
+    Files.createDirectory(dest);
 
+    new FileSystemsOperations().copyDirContentsRecursivelyToDirInDifferentFileSystem(dir, dest);
+  }
 }
