@@ -6,36 +6,32 @@ import java.nio.file.Path
 class FileSystemsOperations implements IFileSystemsOperations
 {
   @Override
-  List<String> copy(Path dir, Path dest)
+  void copyDirRecursivelyToDirInDifferentFileSystem(Path copiedDir, Path destDir)
   {
-    assert Files.isDirectory(dir)
-    assert Files.isDirectory(dest)
-    assert dir.fileSystem != dest.fileSystem
+    assert Files.isDirectory(copiedDir)
+    assert Files.isDirectory(destDir)
+    assert copiedDir.fileSystem != destDir.fileSystem
 
-    List<String> destPaths = []
-
-    destPaths += copyPath(dir, dest).toAbsolutePath().toString()
-    dir.eachFileRecurse {Path it ->
-      destPaths += copyPath(it, dest).toAbsolutePath().toString()
-    }
-
-    return destPaths
+    copyPath(copiedDir, destDir)
+    copiedDir.eachFileRecurse {Path it -> copyPath(it, destDir) }
   }
 
   private static Path copyPath(Path it, Path dest)
   {
     Path itInDest = dest.resolve(it.toString())
 
+    assert !Files.exists(itInDest)
+
     if (Files.isDirectory(it))
     {
-      Files.createDirectories(itInDest)
+      Files.createDirectory(itInDest)
 
     } else if (Files.isRegularFile(it))
     {
-      Files.createDirectories(itInDest.parent)
       Files.copy(it, itInDest)
 
-    } else throw new AssertionError()
+    } else
+      assert false
 
     return itInDest
   }

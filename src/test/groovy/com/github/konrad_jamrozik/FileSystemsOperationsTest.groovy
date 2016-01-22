@@ -47,7 +47,7 @@ public class FileSystemsOperationsTest
     assert Files.isDirectory(dest)
 
     // Act
-    List<String> destPaths = new FileSystemsOperations().copy(dir, dest)
+    dir.copyDirRecursivelyToDirInDifferentFileSystem(dest)
 
     def expectedPaths = [
       "/work/dest/dir",
@@ -56,10 +56,7 @@ public class FileSystemsOperationsTest
       "/work/dest/dir/subdir/data2.txt"
     ]
 
-    expectedPaths.each { assert it in destPaths }
-    destPaths.each { assert it in expectedPaths }
-
-
+    expectedPaths.each { assert Files.exists(targetFs.getPath(it)) }
     assert dest.resolve("dir/data1.txt").text == "123"
     assert dest.resolve("dir/subdir/data2.txt").text == "abc"
   }

@@ -4,6 +4,6 @@ import java.nio.file.Path
 
 interface IFileSystemsOperations
 {
-  List<String> copy(Path dir, Path dest)
+  void copyDirRecursivelyToDirInDifferentFileSystem(Path dir, Path dest)
 
 }
