@@ -20,8 +20,49 @@ public class FileSystemsOperationsTest
   @Test
   void "Copies directory to dir in a different file system"()
   {
+    Path dir = buildFixture()
+    Path dest = buildDestFs()
+
+    // Act
+    dir.copyDirRecursivelyToDirInDifferentFileSystem(dest)
+
+    def expectedPaths = [
+      "/work/dest/dir",
+      "/work/dest/dir/data1.txt",
+      "/work/dest/dir/subdir",
+      "/work/dest/dir/subdir/data2.txt"
+    ]
+
+    expectedPaths.each { assert Files.exists(dest.getFileSystem().getPath(it)) }
+    assert dest.resolve("dir/data1.txt").text == "123"
+    assert dest.resolve("dir/subdir/data2.txt").text == "abc"
+  }
+
+  @Test
+  void "Copies directory contents to dir in a different file system"()
+  {
+    Path dir = buildFixture()
+    Path dest = buildDestFs()
+
+    // Act
+    dir.copyDirContentsRecursivelyToDirInDifferentFileSystem(dest)
+
+    def expectedPaths = [
+      "/work/dest/",
+      "/work/dest/data1.txt",
+      "/work/dest/subdir",
+      "/work/dest/subdir/data2.txt"
+    ]
+
+    expectedPaths.each { assert Files.exists(dest.getFileSystem().getPath(it)) }
+    assert dest.resolve("data1.txt").text == "123"
+    assert dest.resolve("subdir/data2.txt").text == "abc"
+  }
+
+  private static Path buildFixture()
+  {
     FileSystem sourceFs = Jimfs.newFileSystem(Configuration.unix())
-    Path dir = sourceFs.getPath("dir")
+    Path dir = sourceFs.getPath("/work/dir")
     Path subdir = dir.resolve("subdir")
     Path data1 = dir.resolve("data1.txt")
     Path data2 = subdir.resolve("data2.txt")
@@ -40,25 +81,17 @@ public class FileSystemsOperationsTest
 
     assert data1.text == "123"
     assert data2.text == "abc"
+    return dir
+  }
 
+  private static Path buildDestFs()
+  {
     FileSystem targetFs = Jimfs.newFileSystem(Configuration.unix())
     Path dest = targetFs.getPath("dest")
     Files.createDirectories(dest)
     assert Files.isDirectory(dest)
-
-    // Act
-    dir.copyDirRecursivelyToDirInDifferentFileSystem(dest)
-
-    def expectedPaths = [
-      "/work/dest/dir",
-      "/work/dest/dir/data1.txt",
-      "/work/dest/dir/subdir",
-      "/work/dest/dir/subdir/data2.txt"
-    ]
-
-    expectedPaths.each { assert Files.exists(targetFs.getPath(it)) }
-    assert dest.resolve("dir/data1.txt").text == "123"
-    assert dest.resolve("dir/subdir/data2.txt").text == "abc"
+    return dest
   }
+
 
 }

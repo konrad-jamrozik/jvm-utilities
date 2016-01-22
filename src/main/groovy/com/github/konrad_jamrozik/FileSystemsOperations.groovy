@@ -12,13 +12,25 @@ class FileSystemsOperations implements IFileSystemsOperations
     assert Files.isDirectory(destDir)
     assert copiedDir.fileSystem != destDir.fileSystem
 
-    copyPath(copiedDir, destDir)
-    copiedDir.eachFileRecurse {Path it -> copyPath(it, destDir) }
+    copyPath(copiedDir, copiedDir.parent, destDir)
+    copiedDir.eachFileRecurse {Path it -> copyPath(it, copiedDir.parent, destDir) }
   }
 
-  private static Path copyPath(Path it, Path dest)
+  @Override
+  void copyDirContentsRecursivelyToDirInDifferentFileSystem(Path srcDir, Path destDir)
   {
-    Path itInDest = dest.resolve(it.toString())
+    assert Files.isDirectory(srcDir)
+    assert Files.isDirectory(destDir)
+    assert srcDir.fileSystem != destDir.fileSystem
+
+    srcDir.eachFileRecurse {Path it ->
+      copyPath(it, srcDir, destDir) }
+  }
+
+
+  private static Path copyPath(Path it, Path src, Path dest)
+  {
+    Path itInDest = mapToTarget(it, src, dest)
 
     assert !Files.exists(itInDest)
 
@@ -34,5 +46,10 @@ class FileSystemsOperations implements IFileSystemsOperations
       assert false
 
     return itInDest
+  }
+
+  private static Path mapToTarget(Path path, Path srcDir, Path destDir)
+  {
+    return destDir.resolve(srcDir.relativize(path).toString().replace(srcDir.fileSystem.separator, destDir.fileSystem.separator))
   }
 }

@@ -17,5 +17,11 @@ class PathExtensions
   {
     new FileSystemsOperations().copyDirRecursivelyToDirInDifferentFileSystem(self, destDir)
   }
+
+  public static void copyDirContentsRecursivelyToDirInDifferentFileSystem(Path self, Path destDir)
+  {
+    new FileSystemsOperations().copyDirContentsRecursivelyToDirInDifferentFileSystem(self, destDir)
+  }
+
 }
 
