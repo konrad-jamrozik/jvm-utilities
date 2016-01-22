@@ -13,7 +13,7 @@ class PathExtensions
     FilenameUtils.getExtension(self.fileName.toString())
   }
 
-  public static List<String> copyDirRecursivelyToDirInDifferentFileSystem(Path self, Path destDir)
+  public static void copyDirRecursivelyToDirInDifferentFileSystem(Path self, Path destDir)
   {
     new FileSystemsOperations().copyDirRecursivelyToDirInDifferentFileSystem(self, destDir)
   }
