@@ -15,7 +15,7 @@ import java.nio.file.Path
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(JUnit4)
-public class FileSystemPathCopyTest
+public class FileSystemsOperationsTest
 {
 
   @Test
@@ -44,22 +44,23 @@ public class FileSystemPathCopyTest
     assert data2.text == "abc"
 
     FileSystem targetFs = Jimfs.newFileSystem(Configuration.unix())
-
-    def sut = new FileSystemPathCopy(dir, sourceFs.getPath("."), targetFs.getPath("destination"))
+    Path dest = targetFs.getPath("dest")
+    Files.createDirectories(dest)
+    assert Files.isDirectory(dest)
 
     // Act
-    sut.execute()
+    new FileSystemsOperations().copy(dir, dest)
 
     [
-      "/work/destination/dir",
-      "/work/destination/subdir"
+      "/work/dest/dir",
+      "/work/dest/subdir"
     ].each {
       assert Files.isDirectory(targetFs.getPath(it))
     }
 
     [
-      "/work/destination/dir/data1.txt",
-      "/work/destination/subdir/data2.txt"
+      "/work/dest/dir/data1.txt",
+      "/work/dest/subdir/data2.txt"
     ].each {
       assert Files.isRegularFile(targetFs.getPath(it))
     }
