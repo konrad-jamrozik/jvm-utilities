@@ -28,6 +28,18 @@ class FileSystemsOperations implements IFileSystemsOperations
       copyPath(it, srcDir, destDir) }
   }
 
+  @Override
+  void copyFilesToDirInDifferentFileSystem(List<Path> files, Path destDir)
+  {
+    assert Files.isDirectory(destDir)
+    files.each {assert Files.isRegularFile(it)}
+    files.each {assert it.parent != null; assert Files.isDirectory(it.parent)}
+    files.each {assert it.fileSystem != destDir.fileSystem}
+
+    files.each {
+      copyPath(it, it.parent, destDir)
+    }
+  }
 
   private static Path copyPath(Path it, Path src, Path dest)
   {

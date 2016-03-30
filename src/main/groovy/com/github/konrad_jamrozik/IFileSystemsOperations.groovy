@@ -8,4 +8,6 @@ interface IFileSystemsOperations
 
   void copyDirContentsRecursivelyToDirInDifferentFileSystem(Path dir, Path dest)
 
+  void copyFilesToDirInDifferentFileSystem(List<Path> files, Path dest)
+
 }

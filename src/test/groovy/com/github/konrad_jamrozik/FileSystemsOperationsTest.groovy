@@ -36,6 +36,7 @@ public class FileSystemsOperationsTest
     expectedPaths.each { assert Files.exists(dest.getFileSystem().getPath(it)) }
     assert dest.resolve("dir/data1.txt").text == "123"
     assert dest.resolve("dir/subdir/data2.txt").text == "abc"
+    assert dest.resolve("dir/subdir/data3.txt").text == "xyz"
   }
 
   @Test
@@ -44,7 +45,6 @@ public class FileSystemsOperationsTest
     Path dir = buildFixture()
     Path dest = buildDestFs()
 
-
     // Act
     dir.copyDirContentsRecursivelyToDirInDifferentFileSystem(dest)
 
@@ -52,12 +52,38 @@ public class FileSystemsOperationsTest
       "/work/dest/",
       "/work/dest/data1.txt",
       "/work/dest/subdir",
-      "/work/dest/subdir/data2.txt"
+      "/work/dest/subdir/data2.txt",
+      "/work/dest/subdir/data3.txt"
     ]
 
     expectedPaths.each { assert Files.exists(dest.getFileSystem().getPath(it)) }
     assert dest.resolve("data1.txt").text == "123"
     assert dest.resolve("subdir/data2.txt").text == "abc"
+    assert dest.resolve("subdir/data3.txt").text == "xyz"
+  }
+
+  @Test
+  void "Copies files to dir in a different file system"()
+  {
+    Path dir = buildFixture()
+    Path data1 = dir.resolve("data1.txt")
+    Path data2 = dir.resolve("subdir/data2.txt")
+    Path dest = buildDestFs()
+
+    // Act
+    [data1, data2].copyFilesToDirInDifferentFileSystem(dest)
+
+    def expectedPaths = [
+      "/work/dest/",
+      "/work/dest/data1.txt",
+      "/work/dest/data2.txt",
+    ]
+
+    expectedPaths.each { assert Files.exists(dest.getFileSystem().getPath(it)) }
+    assert dest.resolve("data1.txt").text == "123"
+    assert dest.resolve("data2.txt").text == "abc"
+    assert Files.notExists(dest.resolve("data3.txt"))
+    assert Files.notExists(dest.resolve("subdir"))
   }
 
   private static Path buildFixture()
@@ -67,21 +93,26 @@ public class FileSystemsOperationsTest
     Path subdir = dir.resolve("subdir")
     Path data1 = dir.resolve("data1.txt")
     Path data2 = subdir.resolve("data2.txt")
+    Path data3 = subdir.resolve("data3.txt")
     Files.createDirectories(subdir)
     Files.createFile(data1)
     data1.write("123")
     Files.createFile(data2)
     data2.write("abc")
+    Files.createFile(data3)
+    data3.write("xyz")
 
     // @formatter:off
     assert dir     .toRealPath().toString() == "/work/dir"
     assert data1   .toRealPath().toString() == "/work/dir/data1.txt"
     assert subdir  .toRealPath().toString() == "/work/dir/subdir"
     assert data2   .toRealPath().toString() == "/work/dir/subdir/data2.txt"
+    assert data3   .toRealPath().toString() == "/work/dir/subdir/data3.txt"
     // @formatter:on
 
     assert data1.text == "123"
     assert data2.text == "abc"
+    assert data3.text == "xyz"
     return dir
   }
 

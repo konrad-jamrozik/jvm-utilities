@@ -23,5 +23,10 @@ class PathExtensions
     new FileSystemsOperations().copyDirContentsRecursivelyToDirInDifferentFileSystem(self, destDir)
   }
 
+  public static void copyFilesToDirInDifferentFileSystem(List<Path> self, Path destDir)
+  {
+    new FileSystemsOperations().copyFilesToDirInDifferentFileSystem(self, destDir)
+  }
+
 }
 
