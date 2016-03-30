@@ -12,10 +12,6 @@ repositories {
   mavenCentral()
 }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = '2.8'
-}
-
 task sourcesJar(type: Jar, dependsOn: classes) {
   classifier = 'sources'
   from sourceSets.main.allSource
@@ -33,7 +29,7 @@ artifacts {
 
 dependencies {
 
-  compile 'org.codehaus.groovy:groovy-all:2.4.5'
+  compile 'org.codehaus.groovy:groovy-all:2.4.6'
   compile 'commons-io:commons-io:2.4'
   compile 'com.google.jimfs:jimfs:1.0'
 
