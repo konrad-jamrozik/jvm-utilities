@@ -1,3 +1,5 @@
+// Author: Konrad Jamrozik, github.com/konrad-jamrozik
+
 import org.gradle.api.tasks.testing.logging.TestLoggingContainer
 
 group 'com.github.konrad-jamrozik'
