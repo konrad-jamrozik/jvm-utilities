@@ -21,8 +21,6 @@
     <bytecodeTargetLevel>
       <module name="kotlinUtilities_main" target="1.8" />
       <module name="kotlinUtilities_test" target="1.8" />
-      <module name="utilities_main" target="1.8" />
-      <module name="utilities_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
