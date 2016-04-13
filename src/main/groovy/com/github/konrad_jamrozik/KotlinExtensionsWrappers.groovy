@@ -6,7 +6,7 @@ import java.nio.file.Path
 class KotlinExtensionsWrappers
 {
   /**
-   * Returns StringExtensionsKt.envDir(self)
+   * Returns StringExtensionsKt.getAsEnvDir(self)
    */
   public static Path getAsEnvDir(String self)
   {
