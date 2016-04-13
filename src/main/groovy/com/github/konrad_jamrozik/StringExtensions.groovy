@@ -20,4 +20,11 @@ class StringExtensions
       return self.size()
   }
 
+  /**
+   * Wrapper over com.github.konrad_jamrozik.asEnvironmentDir
+   */
+  public static String asEnvironmentDirGroovy(String self)
+  {
+    return ExtensionsKt.asEnvironmentDir(self)
+  }
 }

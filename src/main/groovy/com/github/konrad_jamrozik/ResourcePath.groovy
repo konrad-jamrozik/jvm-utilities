@@ -63,6 +63,9 @@ class ResourcePath
 
   List<URL> alternativeUrls
 
+  /**
+   * Please see the class doc.
+   */
   public ResourcePath(String pathString) throws IOException
   {
     Enumeration<URL> urlsEnum = ClassLoader.getSystemResources(pathString)

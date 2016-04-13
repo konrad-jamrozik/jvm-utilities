@@ -16,6 +16,11 @@ fun Path.resolveRegularFile(file: String): Path
   return resolvedFile
 }
 
+/**
+ * Treats the receiver as a system environment variable pointing to an existing directory in the default file system.
+ * 
+ * Returns [Path] pointing to this directory.
+ */
 fun String.asEnvironmentDir(): Path
 {
   val value = System.getenv(this)
