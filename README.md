@@ -11,12 +11,12 @@ A library of code I find useful in my projects.
 In Gradle:
 
 ```Gradle
-    repositories {
-         maven { url "https://jitpack.io" }
-    }
+repositories {
+    maven { url "https://jitpack.io" }
+}
 
-    dependencies {
-          compile 'com.github.konrad-jamrozik:utilities:master-SNAPSHOT'
-    }
+dependencies {
+    compile 'com.github.konrad-jamrozik:utilities:master-SNAPSHOT'
+}
 ```
 For information on how to use other build systems and build logs, see [jitpack.io](https://jitpack.io/#konrad-jamrozik/utilities).
