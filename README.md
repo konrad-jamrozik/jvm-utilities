@@ -1,7 +1,7 @@
 
-  Author: Konrad Jamrozik, github.com/konrad-jamrozik
-
   [![Build Status](https://travis-ci.org/konrad-jamrozik/utilities.svg?branch=master)](https://travis-ci.org/konrad-jamrozik/utilities)
+  
+  Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
 # Utilities 
 A library of code I find useful in my projects.
@@ -10,6 +10,7 @@ A library of code I find useful in my projects.
 
 In Gradle:
 
+```Gradle
     repositories {
          maven { url "https://jitpack.io" }
     }
@@ -17,5 +18,5 @@ In Gradle:
     dependencies {
           compile 'com.github.konrad-jamrozik:utilities:master-SNAPSHOT'
     }
-
+```
 For information on how to use other build systems and build logs, see [jitpack.io](https://jitpack.io/#konrad-jamrozik/utilities).
