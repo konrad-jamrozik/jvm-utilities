@@ -2,7 +2,6 @@
 //
 package com.github.konrad_jamrozik
 
-@SuppressWarnings("GroovyUnusedDeclaration")
 class StringExtensions
 {
 
@@ -18,13 +17,5 @@ class StringExtensions
       return truncatedSelf
     } else
       return self.size()
-  }
-
-  /**
-   * Wrapper over com.github.konrad_jamrozik.asEnvironmentDir
-   */
-  public static String asEnvironmentDirGroovy(String self)
-  {
-    return ExtensionsKt.asEnvironmentDir(self)
   }
 }
