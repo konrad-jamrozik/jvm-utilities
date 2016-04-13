@@ -4,6 +4,9 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
+/**
+ * 
+ */
 fun Path.resolveRegularFile(file: String): Path
 {
   check(Files.isDirectory(this), {"Files.isDirectory($this)"})
