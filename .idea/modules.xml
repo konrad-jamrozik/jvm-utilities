@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlinUtilities/kotlinUtilities.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlinUtilities/kotlinUtilities.iml" group="kotlinUtilities" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlinUtilities/kotlinUtilities_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlinUtilities/kotlinUtilities_main.iml" group="kotlinUtilities" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlinUtilities/kotlinUtilities_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlinUtilities/kotlinUtilities_test.iml" group="kotlinUtilities" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/utilities.iml" filepath="$PROJECT_DIR$/.idea/modules/utilities.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/utilities_main.iml" filepath="$PROJECT_DIR$/.idea/modules/utilities_main.iml" group="utilities" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/utilities_test.iml" filepath="$PROJECT_DIR$/.idea/modules/utilities_test.iml" group="utilities" />
