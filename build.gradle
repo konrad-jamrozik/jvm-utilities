@@ -30,6 +30,7 @@ repositories {
 task sourcesJar(type: Jar, dependsOn: tasks.classes) {
   classifier = 'sources'
   from sourceSets.main.allSource
+  from sourceSets.test.allSource
 }
 
 task groovydocJar(type: Jar, dependsOn: tasks.groovydoc) {
