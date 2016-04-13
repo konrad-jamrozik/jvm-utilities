@@ -70,7 +70,7 @@ task debug {
 
 tasks.withType(Test) { Test it ->
   it.testLogging { TestLoggingContainer tl ->
-    tl.events 'passed', 'failed', 'skipped'
+    tl.events 'failed', 'skipped'
     // showStandardStreams = true
   }
 }
