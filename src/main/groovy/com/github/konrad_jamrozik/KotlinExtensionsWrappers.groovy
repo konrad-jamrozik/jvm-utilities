@@ -8,9 +8,9 @@ class KotlinExtensionsWrappers
   /**
    * Returns StringExtensionsKt.envDir(self)
    */
-  public static Path envDir(String self)
+  public static Path getAsEnvDir(String self)
   {
-    return StringExtensionsKt.envDir(self)
+    return StringExtensionsKt.getAsEnvDir(self)
   }
 
   /**

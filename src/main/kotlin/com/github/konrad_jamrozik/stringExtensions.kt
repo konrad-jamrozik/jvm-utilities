@@ -12,7 +12,7 @@ import java.nio.file.Paths
  *
  * Throws an [IllegalStateException] if any of the assumptions is violated.
  */
-fun String.envDir(): Path {
+val String.asEnvDir: Path get() {
   val value = System.getenv(this)
 
   checkNotNull(value, { "System.getenv($this) should denote a directory. It is instead null." })
