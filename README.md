@@ -12,11 +12,16 @@ In Gradle:
 
 ```Gradle
 repositories {
+    mavenCentral()
     maven { url "https://jitpack.io" }
 }
 
+ext.utilities_version = '2b983aad11' // replace with the desired commit 
+
 dependencies {
-    compile 'com.github.konrad-jamrozik:utilities:master-SNAPSHOT'
+    compile "com.github.konrad-jamrozik:utilities:$utilities_version"
 }
 ```
-For information on how to use other build systems and build logs, see [jitpack.io](https://jitpack.io/#konrad-jamrozik/utilities).
+
+Please refer to [this project on jitpack.io](https://jitpack.io/#konrad-jamrozik/utilities) for build logs, information how to 
+use other build systems, how to depend on branches, etc.
