@@ -12,14 +12,14 @@ import java.nio.file.Path
  */
 fun Path.resolveRegularFile(file: String): Path
 {
-  check(this.isDirectory, { "'$this'.isDirectory" })
+  check(this.isDirectory, { "Failed check: receiver.isDirectory, where receiver is: $this" })
   
   checkNotNull(file)
-  check(file.length > 0, { "'$file'.length > 0" })
+  check(file.length > 0, { "Failed check: file.length > 0, where file is: '$file'" })
   
   val resolvedFile = this.resolve(file)
 
-  check(resolvedFile.isRegularFile, { "$resolvedFile.isRegularFile" })
+  check(resolvedFile.isRegularFile, { "Failed check: resolvedFile.isRegularFile, where resolvedFile is: $resolvedFile" })
   
   return resolvedFile
 }
@@ -32,14 +32,14 @@ fun Path.resolveRegularFile(file: String): Path
  */
 fun Path.resolveDir(dir: String): Path
 {
-  check(this.isDirectory, { "'$this'.isDirectory" })
+  check(this.isDirectory, { "Failed check: receiver.isDirectory, where receiver is: $this" })
 
   checkNotNull(dir)
-  check(dir.length > 0, { "'$dir'.length > 0" })
+  check(dir.length > 0, { "Failed check: dir.length > 0, where dir is: '$dir'" })
 
   val resolvedDir = this.resolve(dir)
 
-  check(resolvedDir.isDirectory, { "$resolvedDir.isDirectory" })
+  check(resolvedDir.isDirectory, { "Failed check: resolvedDir.isDirectory, where resolvedDir is: $resolvedDir" })
 
   return resolvedDir
 }
