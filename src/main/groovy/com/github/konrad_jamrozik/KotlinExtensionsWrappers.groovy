@@ -1,4 +1,6 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
+
+
 package com.github.konrad_jamrozik
 
 import java.nio.file.Path
@@ -19,6 +21,14 @@ class KotlinExtensionsWrappers
   public static Path resolveRegularFile(Path self, String file)
   {
     return PathExtensionsKt.resolveRegularFile(self, file)
+  }
+
+  /**
+   * Returns PathExtensionsKt.resolveDir(self, dir)
+   */
+  public static Path resolveDir(Path self, String dir)
+  {
+    return PathExtensionsKt.resolveDir(self, dir)
   }
 
   /**
