@@ -1,9 +1,8 @@
-
-  [![Build Status](https://travis-ci.org/konrad-jamrozik/utilities.svg?branch=master)](https://travis-ci.org/konrad-jamrozik/utilities)
+# Utilities [![Build Status](https://travis-ci.org/konrad-jamrozik/utilities.svg?branch=master)](https://travis-ci.org/konrad-jamrozik/utilities)
   
   Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
-# Utilities 
+
 A library of code I find useful in my projects.
 
 ### Depending on this library
