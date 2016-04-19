@@ -1,7 +1,6 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
-
-package com.github.konrad_jamrozik
+package com.konradjamrozik
 
 import com.google.common.base.Objects
 

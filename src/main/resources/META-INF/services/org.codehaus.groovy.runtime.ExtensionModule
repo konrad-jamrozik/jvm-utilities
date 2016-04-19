@@ -2,4 +2,4 @@
 
 moduleName = utilities-module
 moduleVersion = 1.0.0
-extensionClasses = com.github.konrad_jamrozik.PathExtensions, com.github.konrad_jamrozik.IterableExtensions, com.github.konrad_jamrozik.MapExtensions, com.github.konrad_jamrozik.StringExtensions, com.github.konrad_jamrozik.KotlinExtensionsWrappers
+extensionClasses = com.konradjamrozik.PathExtensions, com.konradjamrozik.IterableExtensions, com.konradjamrozik.MapExtensions, com.konradjamrozik.StringExtensions, com.konradjamrozik.KotlinExtensionsWrappers

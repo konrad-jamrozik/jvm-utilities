@@ -1,6 +1,6 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
-package com.github.konrad_jamrozik
+package com.konradjamrozik
 
 import org.junit.FixMethodOrder
 import org.junit.Test

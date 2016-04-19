@@ -1,5 +1,7 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
-package com.github.konrad_jamrozik
+
+
+package com.konradjamrozik
 
 import groovy.transform.stc.ClosureParams
 import groovy.transform.stc.FirstParam
