@@ -1,7 +1,10 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
+
+
 package com.github.konrad_jamrozik
 
-import java.nio.file.Files
+import com.google.common.base.Objects
+
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -80,12 +83,23 @@ class ResourcePath
     }
 
     Path path = Paths.get(nonJarUrl.toURI())
-    if (!(Files.isRegularFile(path) || Files.isDirectory(path)))
+    
+    if (!(path.isRegularFile() || path.isDirectory()))
       throw new IOException("Resource named '$path' is not a regular file nor a directory.\n" +
         "Path to the resource: ${path.toAbsolutePath()}")
 
     this.url = nonJarUrl
     this.alternativeUrls = urls - nonJarUrl
     this.path = path
+  }
+
+  @Override
+  public String toString()
+  {
+    return Objects.toStringHelper(this)
+      .add("path", path)
+      .add("url", url)
+      .add("alternativeUrls", alternativeUrls)
+      .toString();
   }
 }
