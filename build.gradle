@@ -2,7 +2,7 @@
 
 import org.gradle.api.tasks.testing.logging.TestLoggingContainer
 
-group 'com.konradjamrozik'
+group 'com.github.konrad-jamrozik'
 version 'dev'
 
 buildscript {
