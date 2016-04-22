@@ -1,5 +1,6 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
+
 import org.gradle.api.tasks.testing.logging.TestLoggingContainer
 
 group 'com.github.konrad-jamrozik'
@@ -82,3 +83,5 @@ task testi(type: Test, dependsOn: tasks.testClasses) { Test it ->
   it.outputs.upToDateWhen {false}
   it.include '**/*ResourcePathTest*'
 }
+
+apply from: file("log.gradle")
