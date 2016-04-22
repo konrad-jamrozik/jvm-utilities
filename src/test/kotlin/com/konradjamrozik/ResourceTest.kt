@@ -15,6 +15,7 @@ class ResourceTest {
     // act
     val oneFixture = Resource("oneFixture.txt")
     assertTrue(oneFixture.urls.size == 1)
+    assertTrue(oneFixture.text.length > 0)
 
     // act
     Resource("oneFixture.txt", allowAmbiguity = true)

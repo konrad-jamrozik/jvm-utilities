@@ -20,4 +20,6 @@ class Resource(val path: String, allowAmbiguity: Boolean = false) {
     
     urls
   }()
+  
+  val text: String by lazy { urls.first().text }
 }
