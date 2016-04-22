@@ -14,12 +14,10 @@ public class ResourcePathTest
 {
 
   @Test
-  void "Constructs resource path to a file inside a jar archive"()
+  void "Constructs resource path"()
   {
     ResourcePath fixture = new ResourcePath("fixture.txt")
     assert fixture.url.toString().startsWith("file:")
     assert fixture.alternativeUrls.findSingle().toString().startsWith("jar:")
   }
-
-
 }
