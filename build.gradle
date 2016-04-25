@@ -1,6 +1,6 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
-import static groovy.io.FileType.FILES
+import groovy.io.FileType
 
 group 'com.github.konrad-jamrozik'
 version 'dev'
@@ -61,7 +61,7 @@ dependencies {
 List<File> jarNamesInBuiltResourcesDir() {
   SourceSetOutput output = sourceSets.test.output
   List<File> jars = []
-  output.resourcesDir.eachFileMatch FILES, ~/.*\.jar/, { jars << it }
+  output.resourcesDir.eachFileMatch(FileType.FILES, ~/.*\.jar/, { jars << it })
   return jars
 }
 
