@@ -1,5 +1,6 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
+import static groovy.io.FileType.FILES
 
 group 'com.github.konrad-jamrozik'
 version 'dev'
@@ -54,12 +55,16 @@ dependencies {
   
   testCompile group: 'junit', name: 'junit', version: '4.12'
 
-  File resDir = sourceSets.test.resources.srcDirs.first()
-  File subdir = new File(resDir, "subdir")
-  File fixtureZip = resDir.listFiles().find { it.name == "_fixture.zip" }
-  testRuntime files(fixtureZip)
-  testRuntime files(subdir)
+  jarNamesInBuildResourcesDir().each { testRuntime files(it) }
 }
+
+List<File> jarNamesInBuildResourcesDir() {
+  SourceSetOutput output = sourceSets.test.output
+  List<File> jars = []
+  output.resourcesDir.eachFileMatch FILES, ~/.*\.jar/, { jars << it }
+  return jars
+}
+
 
 task testi(type: Test, dependsOn: tasks.testClasses) { Test it ->
   it.outputs.upToDateWhen {false}
@@ -70,12 +75,10 @@ apply from: file("log.gradle")
 
 task debug { Task it ->
   it.group = "help"
-  doLast {
-    println "sourceSets.main.compileClasspath"
-    sourceSets.main.compileClasspath.each { println it}
-    println "sourceSets.main.runtimeClasspath"
-    sourceSets.main.runtimeClasspath.each { println it}
-  }
+  println "sourceSets.test.compileClasspath"
+  sourceSets.test.compileClasspath.each {println it}
+  println "sourceSets.test.runtimeClasspath"
+  sourceSets.test.runtimeClasspath.each {println it}
 }
 
 // Reference: https://discuss.gradle.org/t/how-to-get-a-complete-list-of-all-artifacts-generated-by-a-build/4492
