@@ -16,7 +16,7 @@ public class ResourcePathTest
   @Test
   void "Constructs resource path"()
   {
-    ResourcePath fixture = new ResourcePath("fixture.txt")
+    ResourcePath fixture = new ResourcePath("ambiguous.txt")
     assert fixture.url.toString().startsWith("file:")
     assert fixture.alternativeUrls.findSingle().toString().startsWith("jar:")
   }

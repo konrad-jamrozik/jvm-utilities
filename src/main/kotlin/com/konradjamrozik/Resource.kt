@@ -4,6 +4,8 @@ package com.konradjamrozik
 
 import java.io.IOException
 import java.net.URL
+import java.nio.file.Path
+import java.nio.file.Paths
 
 class Resource @JvmOverloads constructor(val path: String, allowAmbiguity: Boolean = false) {
 
@@ -22,4 +24,20 @@ class Resource @JvmOverloads constructor(val path: String, allowAmbiguity: Boole
   }()
   
   val text: String by lazy { urls.first().text }
+  
+  val standaloneFile: Path by lazy {
+    
+    check(!allowAmbiguity, { "check failed: !allowAmbiguity"})
+    val url = urls.single()
+    
+    if (url.protocol == "file")
+      Paths.get(url.toURI())
+    else
+      copyBesideContainer(url)
+  }
+
+  private fun copyBesideContainer(url: URL): Path {
+    // KJA to implement method stub
+    throw UnsupportedOperationException("not implemented")
+  }
 }

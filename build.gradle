@@ -55,10 +55,10 @@ dependencies {
   
   testCompile group: 'junit', name: 'junit', version: '4.12'
 
-  jarNamesInBuildResourcesDir().each { testRuntime files(it) }
+  jarNamesInBuiltResourcesDir().each { testRuntime files(it) }
 }
 
-List<File> jarNamesInBuildResourcesDir() {
+List<File> jarNamesInBuiltResourcesDir() {
   SourceSetOutput output = sourceSets.test.output
   List<File> jars = []
   output.resourcesDir.eachFileMatch FILES, ~/.*\.jar/, { jars << it }
@@ -73,8 +73,9 @@ task testi(type: Test, dependsOn: tasks.testClasses) { Test it ->
 
 apply from: file("log.gradle")
 
-task debug { Task it ->
+task debug << { Task it ->
   it.group = "help"
+  
   println "sourceSets.test.compileClasspath"
   sourceSets.test.compileClasspath.each {println it}
   println "sourceSets.test.runtimeClasspath"
