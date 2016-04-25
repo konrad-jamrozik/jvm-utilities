@@ -80,8 +80,3 @@ task debug { Task it ->
   println "sourceSets.test.runtimeClasspath"
   sourceSets.test.runtimeClasspath.each {println it}
 }
-
-// Reference: https://discuss.gradle.org/t/how-to-get-a-complete-list-of-all-artifacts-generated-by-a-build/4492
-//    println "Archives Artifacts: " + configurations.archives.allArtifacts
-//    println project.buildDir
-//    sourceSets.test.runtimeClasspath.each { println it }
