@@ -5,12 +5,15 @@ package com.konradjamrozik
 import org.junit.Assert.*
 import org.junit.Test
 import java.io.IOException
+import java.nio.file.Path
 
 class ResourceTest {
 
   private val ambiguous = "ambiguous.txt"
   private val unique_standalone = "unique_standalone.txt"
-  private val unique_jarred = "unique_jarred.txt"
+  private val deeply_jarred = "deeply_jarred.txt"
+  private val nested = "nested.jar"
+  private val toplevel = "toplevel.jar"
   
   @Test
   fun resolves_and_reads_resources() {
@@ -48,9 +51,32 @@ class ResourceTest {
   }
 
   @Test
-  fun extracts_standalone_file_beside_container() {
-    val file = Resource(unique_standalone).standaloneFile
-    // KJA current work
-    //val file2 = Resource(unique_jarred).standaloneFile
+  fun does_not_extract_path_from_plain_file()
+  {
+    val res = Resource(unique_standalone)
+    
+    // act
+    res.withExtractedPath { assertEquals(res.path, this) }
+    
+    assertTrue("Deleted a standalone file that didn't had to be extracted from an archive, and thus, deleted.", 
+      res.path.isRegularFile)
+
+  }
+  
+  @Test
+  fun extracts_path_from_jar_to_the_same_dir() 
+  {
+    var extractedPath: Path? = null
+    val res = Resource(nested)
+    
+    // act
+    res.withExtractedPath {
+    
+      extractedPath = this
+      assertTrue(this.isRegularFile)
+      assertNotEquals(res.url, this.toUri().toURL())
+    }
+    assertNotNull(extractedPath)
+    assertFalse(extractedPath!!.isRegularFile)
   }
 }
