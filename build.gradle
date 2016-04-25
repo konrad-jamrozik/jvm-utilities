@@ -59,9 +59,16 @@ dependencies {
 }
 
 List<File> jarNamesInBuiltResourcesDir() {
-  SourceSetOutput output = sourceSets.test.output
+  SourceSet test = sourceSets.test
+  SourceSetOutput output = test.output
+  
+
+  Set<File> resSrcDirs = test.resources.srcDirs
+  assert resSrcDirs.size() == 1
+  File resSrcDir = resSrcDirs.first()
+
   List<File> jars = []
-  output.resourcesDir.eachFileMatch(FileType.FILES, ~/.*\.jar/, { jars << it })
+  resSrcDir.eachFileMatch FileType.FILES, ~/.*\.jar/, { jars << new File(output.resourcesDir, it.name) }
   return jars
 }
 
