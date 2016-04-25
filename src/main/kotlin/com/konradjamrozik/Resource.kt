@@ -5,7 +5,7 @@ package com.konradjamrozik
 import java.io.IOException
 import java.net.URL
 
-class Resource(val path: String, allowAmbiguity: Boolean = false) {
+class Resource @JvmOverloads constructor(val path: String, allowAmbiguity: Boolean = false) {
 
   val urls: List<URL> = {
 

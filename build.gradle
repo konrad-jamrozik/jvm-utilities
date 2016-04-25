@@ -1,8 +1,6 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
 
-import org.gradle.api.tasks.testing.logging.TestLoggingContainer
-
 group 'com.github.konrad-jamrozik'
 version 'dev'
 
@@ -63,25 +61,24 @@ dependencies {
   testRuntime files(subdir)
 }
 
-task debug {
-  doLast {
-    // Reference: https://discuss.gradle.org/t/how-to-get-a-complete-list-of-all-artifacts-generated-by-a-build/4492
-//    println "Archives Artifacts: " + configurations.archives.allArtifacts
-//    println project.buildDir
-    sourceSets.test.runtimeClasspath.each { println it }
-  }
-}
-
-tasks.withType(Test) { Test it ->
-  it.testLogging { TestLoggingContainer tl ->
-    tl.events 'failed', 'skipped'
-    // showStandardStreams = true
-  }
-}
-
 task testi(type: Test, dependsOn: tasks.testClasses) { Test it ->
   it.outputs.upToDateWhen {false}
   it.include '**/*ResourcePathTest*'
 }
 
 apply from: file("log.gradle")
+
+task debug { Task it ->
+  it.group = "help"
+  doLast {
+    println "sourceSets.main.compileClasspath"
+    sourceSets.main.compileClasspath.each { println it}
+    println "sourceSets.main.runtimeClasspath"
+    sourceSets.main.runtimeClasspath.each { println it}
+  }
+}
+
+// Reference: https://discuss.gradle.org/t/how-to-get-a-complete-list-of-all-artifacts-generated-by-a-build/4492
+//    println "Archives Artifacts: " + configurations.archives.allArtifacts
+//    println project.buildDir
+//    sourceSets.test.runtimeClasspath.each { println it }
