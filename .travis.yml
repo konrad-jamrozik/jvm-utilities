@@ -3,7 +3,7 @@ language: groovy
 jdk:
   - oraclejdk8
 
-script: ./gradlew assemble --info --stacktrace    
+script: ./gradlew build --info --stacktrace    
 
 before_install:
   - chmod +x gradlew
