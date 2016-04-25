@@ -56,3 +56,12 @@ val Path.isRegularFile: Boolean
  */
 val Path.isDirectory: Boolean
   get() = Files.isDirectory(this)
+
+/**
+ * Calls [Files.createDirectories] with the receiver's parent.
+ */
+
+fun Path.mkdirs(): Path? {
+  check (!this.isDirectory)
+  return Files.createDirectories(this.parent)
+}

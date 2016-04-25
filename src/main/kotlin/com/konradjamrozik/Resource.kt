@@ -9,6 +9,7 @@ import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 
 class Resource @JvmOverloads constructor(val name: String, val allowAmbiguity: Boolean = false) {
 
@@ -49,15 +50,8 @@ class Resource @JvmOverloads constructor(val name: String, val allowAmbiguity: B
   }
 
   private fun copyBesideContainer(url: URL): Path {
-    // Example url: jar:file:/C:/my/local/repos/github/utilities/build/resources/test/toplevel.jar!/nested.jar
-
-    // KJA it is here: jar:file:/C:/my/local/repos/github/droidmate/dev/droidmate/projects/core/build/libs/core-dev.jar!/uiautomator-daemon.jar
-    // Extract it to  jar:file:/C:/my/local/repos/github/droidmate/dev/droidmate/projects/core/build/libs/uiautomator-daemon.jar
-    // Reuse existing Resource method and see this: http://stackoverflow.com/questions/11472408/extracting-a-file-from-the-currently-running-jar-through-code
 
     val jarUrlConnection = url.openConnection() as JarURLConnection
-
-
     val jarFile = File(jarUrlConnection.jarFileURL.toURI())
     // Example jarFile: C:\my\local\repos\github\utilities\build\resources\test\toplevel.jar
     val jarDir = jarFile.parent
@@ -85,5 +79,19 @@ class Resource @JvmOverloads constructor(val name: String, val allowAmbiguity: B
 
       Files.delete(extractedPath)
     }
+  }
+
+  fun extractTo(targetDir: Path): Path {
+    
+    val targetFile = if (url.protocol == "file") {
+      targetDir.resolve(name)
+    } else {
+      val jarUrlConnection = url.openConnection() as JarURLConnection
+      targetDir.resolve(jarUrlConnection.jarEntry.toString())
+    }
+
+    targetFile.mkdirs()
+    Files.copy(url.openStream(), targetFile, StandardCopyOption.REPLACE_EXISTING)
+    return targetFile
   }
 }

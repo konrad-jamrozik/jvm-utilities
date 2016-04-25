@@ -6,6 +6,7 @@ import org.junit.Assert.*
 import org.junit.Test
 import java.io.IOException
 import java.nio.file.Path
+import java.nio.file.Paths
 
 class ResourceTest {
 
@@ -78,5 +79,21 @@ class ResourceTest {
     }
     assertNotNull(extractedPath)
     assertFalse(extractedPath!!.isRegularFile)
+  }
+
+  @Test
+  fun extracts_plain_file_by_just_copying() {
+    val res = Resource(unique_standalone)
+    val extracted: Path = res.extractTo(Paths.get("./temp_resources_extracted_from_jars"))
+    assertTrue(extracted.isRegularFile)
+    assertEquals(extracted.fileName.toString(), res.name)
+  }
+  
+  @Test
+  fun extracts_path_from_jar_to_dir() {
+    val res = Resource(nested)
+    val extracted: Path = res.extractTo(Paths.get("./temp_resources_extracted_from_jars"))
+    assertTrue(extracted.isRegularFile)
+    assertEquals(extracted.fileName.toString(), res.name)
   }
 }

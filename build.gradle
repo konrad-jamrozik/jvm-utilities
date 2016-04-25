@@ -59,9 +59,9 @@ dependencies {
 }
 
 List<File> jarNamesInBuiltResourcesDir() {
+  
   SourceSet test = sourceSets.test
   SourceSetOutput output = test.output
-  
 
   Set<File> resSrcDirs = test.resources.srcDirs
   assert resSrcDirs.size() == 1
