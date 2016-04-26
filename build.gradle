@@ -29,6 +29,11 @@ repositories {
   mavenCentral()
 }
 
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.20'
+  compile 'org.slf4j:slf4j-simple:1.7.20'
+}
+
 task sourcesJar(type: Jar, dependsOn: tasks.classes) {
   classifier = 'sources'
   from sourceSets.main.allSource

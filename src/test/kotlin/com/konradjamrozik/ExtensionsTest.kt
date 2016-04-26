@@ -8,5 +8,7 @@ class ExtensionsTest {
 
   @Test
   fun KotlinScratchpadTest() {
+//    val p = Paths.get("./tmp")
+//    p.createDirIfNotExists()
   }
 }

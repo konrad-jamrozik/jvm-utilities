@@ -65,3 +65,12 @@ fun Path.mkdirs(): Path? {
   check (!this.isDirectory)
   return Files.createDirectories(this.parent)
 }
+
+fun Path.createDirIfNotExists(): Path {
+  if (Files.notExists(this)) {
+    loggerFor(this.javaClass).trace("Creating non-existing directory: ${this.toAbsolutePath()}")
+    Files.createDirectory(this)
+    check(this.isDirectory)
+  }
+  return this
+}
