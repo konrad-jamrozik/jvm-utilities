@@ -50,7 +50,7 @@ class KotlinExtensionsWrappers
   /**
    * Returns PathExtensionsKt.createDirIfNotExists(self)
    */
-  public static Path createDirIfNotExists(Path self)
+  public static Boolean createDirIfNotExists(Path self)
   {
     return PathExtensionsKt.createDirIfNotExists(self)
   }
