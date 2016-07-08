@@ -1,7 +1,7 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
+
 package com.konradjamrozik
 
-// KJA 1 move entire file to utilities project + tests
 /**
  * @return 
  *   Map of counts of how many times given elements appears in this receiver [Iterable].
