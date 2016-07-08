@@ -4,7 +4,7 @@ package com.konradjamrozik
 
 import org.junit.Test
 
-class ExtensionsTest {
+class ScratchpadTest {
 
   @Test
   fun KotlinScratchpadTest() {

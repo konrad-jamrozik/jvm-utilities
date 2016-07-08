@@ -2,4 +2,4 @@
 
 moduleName = utilities-module
 moduleVersion = 1.0.0
-extensionClasses = com.konradjamrozik.PathExtensions, com.konradjamrozik.IterableExtensions, com.konradjamrozik.MapExtensions, com.konradjamrozik.StringExtensions, com.konradjamrozik.KotlinExtensionsWrappers
+extensionClasses = com.konradjamrozik.PathExtensions, com.konradjamrozik.IterableExtensions, com.konradjamrozik.MapExtensions, com.konradjamrozik.StringExtensions, com.konradjamrozik.GroovyWrappersForKotlinFunctions

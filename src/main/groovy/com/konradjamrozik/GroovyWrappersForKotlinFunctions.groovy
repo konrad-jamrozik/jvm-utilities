@@ -5,7 +5,7 @@ package com.konradjamrozik
 
 import java.nio.file.Path
 
-class KotlinExtensionsWrappers
+class GroovyWrappersForKotlinFunctions
 {
   /**
    * Returns StringExtensionsKt.getAsEnvDir(self)
