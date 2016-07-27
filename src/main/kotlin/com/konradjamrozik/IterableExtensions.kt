@@ -2,6 +2,9 @@
 
 package com.konradjamrozik
 
+import com.google.common.collect.ArrayListMultimap
+import com.google.common.collect.LinkedListMultimap
+
 /**
  * @return 
  *   Map of counts of how many times given elements appears in this receiver [Iterable].
@@ -48,4 +51,18 @@ fun <T, TItem> Iterable<T>.uniqueItemsWithFirstOccurrenceIndex(
     accumulatedMap.plus(uniqueStringsToNewItemsWithIndexes)
     
   }).map { it.value }.toMap()
+}
+
+inline fun <T, K, V> Iterable<T>.associateMany(transform: (T) -> Pair<K, V>): Map<K, Iterable<V>> {
+  val multimap = ArrayListMultimap.create<K, V>()
+  this.forEach { val pair = transform(it); multimap.put(pair.first, pair.second) }
+  return multimap.asMap()
+}
+
+fun <K, V> Iterable<Map<K, Iterable<V>>>.flatten(): Map<K, Iterable<V>> {
+  val multimap = LinkedListMultimap.create<K, V>()
+  this.forEach { map ->
+    map.forEach { multimap.putAll(it.key, it.value) }
+  }
+  return multimap.asMap()
 }
