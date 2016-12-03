@@ -87,11 +87,13 @@ task testi(type: Test, dependsOn: tasks.testClasses) { Test it ->
 
 apply from: file("log.gradle")
 
-task debug << { Task it ->
+task debug { Task it ->
   it.group = "help"
-  
-  println "sourceSets.test.compileClasspath"
-  sourceSets.test.compileClasspath.each {println it}
-  println "sourceSets.test.runtimeClasspath"
-  sourceSets.test.runtimeClasspath.each {println it}
+  doLast {  
+    
+    println "sourceSets.test.compileClasspath"
+    sourceSets.test.compileClasspath.each {println it}
+    println "sourceSets.test.runtimeClasspath"
+    sourceSets.test.runtimeClasspath.each {println it}
+  }
 }
