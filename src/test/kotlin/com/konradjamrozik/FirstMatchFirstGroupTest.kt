@@ -14,8 +14,8 @@ class FirstMatchFirstGroupTest {
 
     assertFailsWith(Exception::class) { FirstMatchFirstGroup("target", "target")}
     assertThat(FirstMatchFirstGroup("target", "(target)").value, `is`("target"))
-    assertThat(FirstMatchFirstGroup("target", "(target)", "target").value, `is`("target"))
-    assertThat(FirstMatchFirstGroup("target", "target", "(target)").value, `is`("target"))
+    assertThat(FirstMatchFirstGroup("target", "()", "(target)", "target").value, `is`("target"))
+    assertThat(FirstMatchFirstGroup("target", "target", "(target)", "()").value, `is`("target"))
     
     assertThat(FirstMatchFirstGroup("label='xyz'", "label='(.*)'").value, `is`("xyz"))
     assertFailsWith(Exception::class) { FirstMatchFirstGroup("label=''", "label='(.*)'")}

@@ -1,7 +1,7 @@
 package com.konradjamrozik
 
 class FirstMatchFirstGroup(val target: String, vararg regexps: String) {
-  val value: String?
+  val value: String
 
   init {
     require(regexps.isNotEmpty())
@@ -18,6 +18,7 @@ class FirstMatchFirstGroup(val target: String, vararg regexps: String) {
         "Target: $target Regexps: ${regexps.joinToString()}")
 
     value = firstGroups.first()
+    check(value.isNotEmpty())
   }
 }
 
