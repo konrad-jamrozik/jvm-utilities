@@ -34,6 +34,9 @@ dependencies {
   compile 'org.slf4j:slf4j-simple:1.7.20'
 }
 
+// Necessary to make build work. Looks like Groovy doesn't maintain necessary ordering with Kotlin.
+compileGroovy.dependsOn("copyMainKotlinClasses")
+
 task sourcesJar(type: Jar, dependsOn: tasks.classes) {
   classifier = 'sources'
   from sourceSets.main.allSource
