@@ -10,7 +10,7 @@ class GroovyWrappersForKotlinFunctions
   /**
    * Returns StringExtensionsKt.getAsEnvDir(self)
    */
-  public static Path getAsEnvDir(String self)
+   static Path getAsEnvDir(String self)
   {
     return StringExtensionsKt.getAsEnvDir(self)
   }
@@ -18,7 +18,7 @@ class GroovyWrappersForKotlinFunctions
   /**
    * Returns PathExtensionsKt.resolveRegularFile(self, file)
    */
-  public static Path resolveRegularFile(Path self, String file)
+  static Path resolveRegularFile(Path self, String file)
   {
     return PathExtensionsKt.resolveRegularFile(self, file)
   }
@@ -26,7 +26,7 @@ class GroovyWrappersForKotlinFunctions
   /**
    * Returns PathExtensionsKt.resolveDir(self, dir)
    */
-  public static Path resolveDir(Path self, String dir)
+  static Path resolveDir(Path self, String dir)
   {
     return PathExtensionsKt.resolveDir(self, dir)
   }
@@ -34,7 +34,7 @@ class GroovyWrappersForKotlinFunctions
   /**
    * Returns PathExtensionsKt.isRegularFile(self)
    */
-  public static boolean isRegularFile(Path self)
+  static boolean isRegularFile(Path self)
   {
     return PathExtensionsKt.isRegularFile(self)
   }
@@ -42,7 +42,7 @@ class GroovyWrappersForKotlinFunctions
   /**
    * Returns PathExtensionsKt.isDirectory(self)
    */
-  public static boolean isDirectory(Path self)
+  static boolean isDirectory(Path self)
   {
     return PathExtensionsKt.isDirectory(self)
   }
@@ -50,8 +50,13 @@ class GroovyWrappersForKotlinFunctions
   /**
    * Returns PathExtensionsKt.createDirIfNotExists(self)
    */
-  public static Boolean createDirIfNotExists(Path self)
+  static Boolean createDirIfNotExists(Path self)
   {
     return PathExtensionsKt.createDirIfNotExists(self)
+  }
+
+   static void mkdirs(Path self)
+  {
+    PathExtensionsKt.mkdirs(self)
   }
 }
