@@ -1,7 +1,7 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
-
-
 package com.konradjamrozik
+
+import kotlin.text.StringsKt
 
 import java.nio.file.Path
 
@@ -10,7 +10,7 @@ class GroovyWrappersForKotlinFunctions
   /**
    * Returns StringExtensionsKt.getAsEnvDir(self)
    */
-   static Path getAsEnvDir(String self)
+  static Path getAsEnvDir(String self)
   {
     return StringExtensionsKt.getAsEnvDir(self)
   }
@@ -54,8 +54,13 @@ class GroovyWrappersForKotlinFunctions
   {
     return PathExtensionsKt.createDirIfNotExists(self)
   }
+  
+  static String withoutExtension(String self)
+  {
+    return StringsKt.substringBeforeLast(self, ".", self)
+  }
 
-   static void mkdirs(Path self)
+  static void mkdirs(Path self)
   {
     PathExtensionsKt.mkdirs(self)
   }
