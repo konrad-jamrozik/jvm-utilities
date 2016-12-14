@@ -7,12 +7,19 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4)
-public class ScratchpadTest
+ class ScratchpadTest
 {
 
   @Test
   void "test"()
   {
+    def sw = new StringWriter()
+    sw.withWriter {wr ->
+
+      wr.write("widgets ")
+
+    }
+    println sw.toString()
   }
 }
 
