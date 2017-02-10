@@ -8,7 +8,7 @@ import java.io.IOException
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class ResourceTest {
+internal class ResourceTest {
 
   private val ambiguous = "ambiguous.txt"
   private val unique_standalone = "unique_standalone.txt"

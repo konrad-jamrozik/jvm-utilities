@@ -7,7 +7,7 @@ import org.hamcrest.Matchers.`is`
 import org.junit.Test
 import kotlin.test.assertFailsWith
 
-class FirstMatchFirstGroupTest {
+internal class FirstMatchFirstGroupTest {
 
   @Test
   fun `matches`() {

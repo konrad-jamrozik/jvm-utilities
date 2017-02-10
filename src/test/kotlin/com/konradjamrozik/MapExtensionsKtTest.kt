@@ -1,11 +1,12 @@
 // Author: Konrad Jamrozik, github.com/konrad-jamrozik
+
 package com.konradjamrozik
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.Test
 
-class MapExtensionsKtTest {
+internal class MapExtensionsKtTest {
 
   @Test
   fun transposeTest() {

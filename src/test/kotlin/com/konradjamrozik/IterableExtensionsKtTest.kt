@@ -7,7 +7,7 @@ import org.hamcrest.Matchers.equalTo
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class IterableExtensionsKtTest {
+internal class IterableExtensionsKtTest {
   
   @Test
   fun `frequencies test`() {

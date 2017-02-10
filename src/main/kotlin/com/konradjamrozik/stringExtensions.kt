@@ -16,13 +16,13 @@ val String.asEnvDir: Path get() {
   val value = System.getenv(this)
 
   checkNotNull(value, { "System.getenv($this) should denote a directory. It is instead null." })
-  check(value.length > 0, { "System.getenv($this) should denote a directory. It is instead an empty string." })
+  check(value.isNotEmpty(), { "System.getenv($this) should denote a directory. It is instead an empty string." })
 
   val dir = Paths.get(value)
 
   check(dir.isDirectory, {
     "System.getenv($this) should be a path pointing to an existing directory. " +
-      "The faulty path: ${dir.toString()}"
+      "The faulty path: $dir"
   })
 
   return dir
