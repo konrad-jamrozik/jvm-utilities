@@ -2,8 +2,10 @@
 
 package com.konradjamrozik
 
+import org.codehaus.groovy.runtime.NioGroovyMethods
 import java.nio.file.Files
 import java.nio.file.Path
+import java.util.stream.Stream
 
 /**
  * Returns [Path] pointing to a regular file denoted by the [file], resolved against the receiver.
@@ -15,7 +17,7 @@ fun Path.resolveRegularFile(file: String): Path
   check(this.isDirectory, { "Failed check: receiver.isDirectory, where receiver is: $this" })
   
   checkNotNull(file)
-  check(file.length > 0, { "Failed check: file.length > 0, where file is: '$file'" })
+  check(file.isNotEmpty(), { "Failed check: file.length > 0, where file is: '$file'" })
   
   val resolvedFile = this.resolve(file)
 
@@ -30,12 +32,12 @@ fun Path.resolveRegularFile(file: String): Path
  *
  * Throws an [IllegalStateException] if any of the assumptions are violated.
  */
-fun Path.resolveDir(dir: String): Path
-{
+fun Path.resolveDir(dir: String): Path {
+
   check(this.isDirectory, { "Failed check: receiver.isDirectory, where receiver is: $this" })
 
   checkNotNull(dir)
-  check(dir.length > 0, { "Failed check: dir.length > 0, where dir is: '$dir'" })
+  check(dir.isNotEmpty(), { "Failed check: dir.length > 0, where dir is: '$dir'" })
 
   val resolvedDir = this.resolve(dir)
 
@@ -48,7 +50,6 @@ fun Path.resolveDir(dir: String): Path
  * Calls [Files.isRegularFile] with the receiver.
  */
 val Path.isRegularFile: Boolean
-  
   get() = Files.isRegularFile(this)
 
 /**
@@ -62,7 +63,7 @@ val Path.isDirectory: Boolean
  */
 
 fun Path.mkdirs(): Path? {
-  check (!this.isDirectory)
+  check(!this.isDirectory)
   return Files.createDirectories(this.parent)
 }
 
@@ -73,4 +74,30 @@ fun Path.createDirIfNotExists(): Boolean {
     return true
   }
   return false
+}
+
+fun Path.createFileAndParentDirsIfNecessary() {
+  this.parent.createDirIfNotExists()
+  Files.createFile(this)
+  check(this.isRegularFile)
+}
+
+fun Path.writeText(text: String) {
+  check(this.isRegularFile)
+  NioGroovyMethods.write(this, text)
+}
+
+fun Path.createWithTextCreatingParentDirsIfNecessary(text: String) {
+  this.createFileAndParentDirsIfNecessary()
+  this.writeText(text)
+}
+
+val Path.files: Stream<Path>
+  get() {
+    check(this.isDirectory)
+    return Files.list(this)
+  }
+
+fun Path.printFileNames() {
+  this.files.forEach { println(it.fileName) }
 }

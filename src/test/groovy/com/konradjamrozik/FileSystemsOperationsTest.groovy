@@ -58,7 +58,7 @@ public class FileSystemsOperationsTest
       "/work/dest/subdir/data3.txt"
     ]
 
-    expectedPaths.each { assert Files.exists(dest.getFileSystem().getPath(it)) }
+    expectedPaths.each { assert Files.exists(dest.fileSystem.getPath(it)) }
     assert dest.resolve("data1.txt").text == "123"
     assert dest.resolve("subdir/data2.txt").text == "abc"
     assert dest.resolve("subdir/data3.txt").text == "xyz"
@@ -130,10 +130,10 @@ public class FileSystemsOperationsTest
   @Test
   public void UsageInJavaExample() throws IOException
   {
-    Path dir =  Jimfs.newFileSystem().getPath("dirWithSomeContents");
-    Files.createDirectory(dir);
-    Path dest = Jimfs.newFileSystem().getPath("destDir");
-    Files.createDirectory(dest);
+    Path dir =  Jimfs.newFileSystem().getPath("dirWithSomeContents")
+    Files.createDirectory(dir)
+    Path dest = Jimfs.newFileSystem().getPath("destDir")
+    Files.createDirectory(dest)
 
     new FileSystemsOperations().copyDirContentsRecursivelyToDirInDifferentFileSystem(dir, dest);
   }
