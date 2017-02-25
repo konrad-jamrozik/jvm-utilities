@@ -5,7 +5,6 @@ package com.konradjamrozik
 import org.codehaus.groovy.runtime.NioGroovyMethods
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.stream.Stream
 
 /**
  * Returns [Path] pointing to a regular file denoted by the [file], resolved against the receiver.
@@ -92,10 +91,10 @@ fun Path.createWithTextCreatingParentDirsIfNecessary(text: String) {
   this.writeText(text)
 }
 
-val Path.files: Stream<Path>
+val Path.files: MutableList<Path>
   get() {
     check(this.isDirectory)
-    return Files.list(this)
+    return Files.list(this).toList()
   }
 
 fun Path.printFileNames() {

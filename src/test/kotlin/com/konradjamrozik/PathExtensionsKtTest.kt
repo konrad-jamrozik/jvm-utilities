@@ -6,26 +6,31 @@ import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import org.codehaus.groovy.runtime.NioGroovyMethods
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.contains
+import org.hamcrest.Matchers.containsInAnyOrder
 import org.junit.jupiter.api.Test
 import java.nio.file.Path
-
+// KJA to clean up this file
 internal class PathExtensionsKtTest
 {
   @Test
   fun `replaces text in all files`() {
-    // KJA curr work
-    // prepare in-memory file system with files and contents
+    
+    val fooContents = "contents 1\nabc-contentsX-cde 2"
+    val barContents = "3contentscont\nents3"
+    
     val dir: Path = mapOf(
-      "file1" to "contents 1\nabc-contentsX-cde 2", 
-      "file2" to "3contentscont\nents3")
+      "foo.txt" to fooContents, 
+      "bar.txt" to barContents)
       .toInMemoryDir()
     
     // Act
     dir.replaceTextInAllFiles("contents","X")
     
     // assertThat(Arrays.asList("foo", "bar"), contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))
-    assertThat(dir.allFilesText, contains("X 1\nabc-XX-cde 2", "3Xcont\nents3"))
+    assertThat(dir.allFilesTexts, 
+      containsInAnyOrder(
+        fooContents.replace("contents","X"), 
+        barContents.replace("contents","X")))
   }
 }
 
@@ -50,7 +55,7 @@ private fun Path.replaceTextInAllFiles(sourceText: String, replacementText: Stri
 
 fun Path.replaceText(sourceText: String, replacementText: String) {
   check(this.isRegularFile)
-  this.text.replace(sourceText, replacementText)
+  this.writeText(this.text.replace(sourceText, replacementText))
 }
 
 val Path.text: String
@@ -59,7 +64,8 @@ val Path.text: String
     return NioGroovyMethods.getText(this)
   }
 
-private val Path.allFilesText: List<String>
+private val Path.allFilesTexts: Iterable<String>
   get() {
-    return emptyList() // KJA to implement
+    check(this.isDirectory)
+    return this.files.map(Path::text)
   }
