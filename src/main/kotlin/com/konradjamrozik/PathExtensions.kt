@@ -25,7 +25,6 @@ fun Path.resolveRegularFile(file: String): Path
   return resolvedFile
 }
 
-
 /**
  * Returns [Path] pointing to a dir denoted by the [dir], resolved against the receiver.
  *
@@ -100,3 +99,26 @@ val Path.files: List<Path>
 fun Path.printFileNames() {
   this.files.forEach { println(it.fileName) }
 }
+
+ fun java.nio.file.Path.replaceTextInAllFiles(sourceText: String, replacementText: String) {
+  
+  check(this.isDirectory)
+  this.files.forEach { it.replaceText(sourceText, replacementText) }
+}
+
+fun java.nio.file.Path.replaceText(sourceText: String, replacementText: String) {
+  check(this.isRegularFile)
+  this.writeText(this.text.replace(sourceText, replacementText))
+}
+
+val java.nio.file.Path.text: String
+  get() {
+    check(this.isRegularFile)
+    return org.codehaus.groovy.runtime.NioGroovyMethods.getText(this)
+  }
+
+val java.nio.file.Path.allFilesTexts: Iterable<String>
+  get() {
+    check(this.isDirectory)
+    return this.files.map(Path::text)
+  }
