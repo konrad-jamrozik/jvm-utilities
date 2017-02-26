@@ -91,10 +91,10 @@ fun Path.createWithTextCreatingParentDirsIfNecessary(text: String) {
   this.writeText(text)
 }
 
-val Path.files: MutableList<Path>
+val Path.files: List<Path>
   get() {
     check(this.isDirectory)
-    return Files.list(this).toList()
+    return Files.list(this).toList().filter(Path::isRegularFile)
   }
 
 fun Path.printFileNames() {

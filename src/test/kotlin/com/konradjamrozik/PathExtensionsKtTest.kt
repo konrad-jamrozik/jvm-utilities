@@ -7,6 +7,7 @@ import com.google.common.jimfs.Jimfs
 import org.codehaus.groovy.runtime.NioGroovyMethods
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.containsInAnyOrder
+import org.hamcrest.core.IsEqual
 import org.junit.jupiter.api.Test
 import java.nio.file.Path
 // KJA to clean up this file
@@ -15,22 +16,27 @@ internal class PathExtensionsKtTest
   @Test
   fun `replaces text in all files`() {
     
-    val fooContents = "contents 1\nabc-contentsX-cde 2"
-    val barContents = "3contentscont\nents3"
+    val fooText = "contents 1\nabc-contentsX-cde 2"
+    val barText = "3contentscont\nents3"
+    val quxText = "do not replace contents"
     
     val dir: Path = mapOf(
-      "foo.txt" to fooContents, 
-      "bar.txt" to barContents)
+      "foo.txt" to fooText, 
+      "bar.txt" to barText,
+      "subdir/qux.txt" to quxText)
       .toInMemoryDir()
     
     // Act
     dir.replaceTextInAllFiles("contents","X")
     
-    // assertThat(Arrays.asList("foo", "bar"), contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))
     assertThat(dir.allFilesTexts, 
       containsInAnyOrder(
-        fooContents.replace("contents","X"), 
-        barContents.replace("contents","X")))
+        fooText.replace("contents","X"), 
+        barText.replace("contents","X")
+      )
+    )
+    val actualQuxText = dir.resolveRegularFile("subdir/qux.txt").text
+    assertThat(actualQuxText, IsEqual(quxText))
   }
 }
 
