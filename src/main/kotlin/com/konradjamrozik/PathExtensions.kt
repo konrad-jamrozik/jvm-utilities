@@ -96,29 +96,29 @@ val Path.files: List<Path>
     return Files.list(this).toList().filter(Path::isRegularFile)
   }
 
-fun Path.printFileNames() {
-  this.files.forEach { println(it.fileName) }
-}
-
- fun java.nio.file.Path.replaceTextInAllFiles(sourceText: String, replacementText: String) {
+ fun Path.replaceTextInAllFiles(sourceText: String, replacementText: String) {
   
   check(this.isDirectory)
   this.files.forEach { it.replaceText(sourceText, replacementText) }
 }
 
-fun java.nio.file.Path.replaceText(sourceText: String, replacementText: String) {
+fun Path.replaceText(sourceText: String, replacementText: String) {
   check(this.isRegularFile)
   this.writeText(this.text.replace(sourceText, replacementText))
 }
 
-val java.nio.file.Path.text: String
+val Path.text: String
   get() {
     check(this.isRegularFile)
-    return org.codehaus.groovy.runtime.NioGroovyMethods.getText(this)
+    return NioGroovyMethods.getText(this)
   }
 
-val java.nio.file.Path.allFilesTexts: Iterable<String>
+val Path.allFilesTexts: Iterable<String>
   get() {
     check(this.isDirectory)
     return this.files.map(Path::text)
   }
+
+fun Path.printFileNames() {
+  this.files.forEach { println(it.fileName) }
+}

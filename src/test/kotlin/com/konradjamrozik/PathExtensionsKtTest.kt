@@ -11,12 +11,11 @@ import java.nio.file.Path
 internal class PathExtensionsKtTest
 {
   @Test
-  fun `replaces text in all files`() {
+  fun `replaces text in all files in dir`() {
     
     val fooText = "contents 1\nabc-contentsX-cde 2"
     val barText = "3contentscont\nents3"
     val quxText = "do not replace contents"
-    
     val dir: Path = mapOf(
       "foo.txt" to fooText, 
       "bar.txt" to barText,
@@ -28,11 +27,8 @@ internal class PathExtensionsKtTest
     
     assertThat(dir.allFilesTexts, 
       containsInAnyOrder(
-        fooText.replace("contents","X"), 
-        barText.replace("contents","X")
-      )
-    )
-    
+        fooText.replace("contents", "X"),
+        barText.replace("contents", "X")))
     val actualQuxText = dir.resolveRegularFile("subdir/qux.txt").text
     assertThat(actualQuxText, IsEqual(quxText))
   }
