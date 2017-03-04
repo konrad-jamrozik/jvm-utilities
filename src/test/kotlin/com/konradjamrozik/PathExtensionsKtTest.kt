@@ -11,6 +11,27 @@ import java.nio.file.Path
 internal class PathExtensionsKtTest
 {
   @Test
+  fun `removes second column`() {
+    val fooText = """
+        |headerText_no1 second.column.title Third-Column:sub.title
+        |           0.0   0 0.1
+        |          20.0  10  .7
+        |         300.0  50  33
+
+       """.trimMargin()
+    
+    // Act
+    val actual = fooText.removeColumn(2)
+    
+    assertThat(actual, IsEqual("""
+        |headerText_no1 Third-Column:sub.title
+        |           0.0 0.1
+        |          20.0  .7
+        |         300.0  33
+
+       """.trimMargin()))
+  }
+  @Test
   fun `replaces text in all files in dir`() {
     
     val fooText = "contents 1\nabc-contentsX-cde 2"

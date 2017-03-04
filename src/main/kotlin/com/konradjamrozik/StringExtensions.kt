@@ -27,3 +27,11 @@ val String.asEnvDir: Path get() {
 
   return dir
 }
+
+fun String.removeColumn(column: Int): String {
+  return this.lines().map { line ->
+    val columns = Regex("\\s*\\S+").findAll(line).map { it.value }.toList()
+
+    columns.filterIndexed { index, _ -> index+1 != column }.joinToString(separator = "")
+  }.joinToString(separator = "\n")
+}

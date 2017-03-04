@@ -2,13 +2,11 @@
 
 package com.konradjamrozik
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 internal class KotlinScratchpadTest {
 
   @Test
-  fun KotlinScratchpadTest() {
-//    val p = Paths.get("./tmp")
-//    p.createDirIfNotExists()
+  fun MainTest() {
   }
 }
