@@ -5,14 +5,13 @@ package com.konradjamrozik
 import com.google.common.base.Stopwatch
 import org.junit.jupiter.api.Test
 import java.io.FileWriter
-import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
 internal class KotlinScratchpadTest {
 
   @Test
   fun MainTest() {
-    val dir = Paths.get("""""")
+    // val dir = Paths.get("""""")
     //dir.replaceTextInAllFiles("a","b")
   }
 

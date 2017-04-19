@@ -96,8 +96,7 @@ val Path.files: List<Path>
     return Files.list(this).toList().filter(Path::isRegularFile)
   }
 
- fun Path.replaceTextInAllFiles(sourceText: String, replacementText: String) {
-  
+fun Path.replaceTextInAllFiles(sourceText: String, replacementText: String) {
   check(this.isDirectory)
   this.files.forEach { it.replaceText(sourceText, replacementText) }
 }
