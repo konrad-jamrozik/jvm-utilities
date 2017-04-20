@@ -15,7 +15,7 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 
-ext.utilities_version = '2b983aad11' // replace with the desired commit 
+ext.utilities_version = '69e2f87ea6' // replace with the desired commit 
 
 dependencies {
     compile "com.github.konrad-jamrozik:utilities:$utilities_version"
