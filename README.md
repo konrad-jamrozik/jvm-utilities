@@ -1,9 +1,9 @@
-# Utilities [![Build Status](https://travis-ci.org/konrad-jamrozik/utilities.svg?branch=master)](https://travis-ci.org/konrad-jamrozik/utilities)
+# JVM-Utilities [![Build Status](https://travis-ci.org/konrad-jamrozik/utilities.svg?branch=master)](https://travis-ci.org/konrad-jamrozik/utilities)
   
   Author: Konrad Jamrozik, github.com/konrad-jamrozik
 
 
-A library of code I find useful in my projects.
+A library of code I find useful in my projects for the Java Vritual Machine.
 
 ### Depending on this library
 
